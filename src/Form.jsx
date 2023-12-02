@@ -1,9 +1,8 @@
 import React, { useContext } from "react";
 import { TextField } from "@mui/material";
-import { ThemeContext } from "./App";
+import { useTheme } from "./context/ThemeContext";
 function Form() {
-  const checked = useContext(ThemeContext);
-  console.log(checked);
+  const {checked} = useTheme()
   return (
     <form className="loginForm">
       <TextField

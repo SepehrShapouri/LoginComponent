@@ -1,8 +1,12 @@
 import React, { useContext, useState } from "react";
 import { Switch } from "@mui/material";
-import { ThemeContext } from "./App";
-function DarkModeToggler({ SwitchHandler }) {
-  const checked = useContext(ThemeContext)
+import { useTheme } from "./context/ThemeContext";
+function DarkModeToggler() {
+  const {checked,setChecked} = useTheme()
+  const SwitchHandler = (e) => {
+    const value = e.target.checked;
+    setChecked(value ? true : false);
+  };
   return (
     <div style={{ display: "flex", alignItems: "center" }}>
       <p style={{ transition: "ease-in-out all 0.4s" }}>
