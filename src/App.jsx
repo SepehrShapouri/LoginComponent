@@ -4,28 +4,24 @@ import Form from "./Form";
 import FormButtons from "./FormButtons";
 import { Switch } from "@mui/material";
 import DarkModeToggler from "./DarkModeToggler";
-import { useState } from "react";
-import { createContext } from "react";
-export const ThemeContext = createContext();
+import { ThemeProvider, useTheme } from "./context/ThemeContext";
 function App() {
-  const [checked, setChecked] = useState(false);
-  const SwitchHandler = (e) => {
-    const value = e.target.checked;
-    setChecked(value ? true : false);
-    console.log(checked);
-  };
   return (
-    <ThemeContext.Provider value={checked}>
+    <ThemeProvider>
       <div className="container">
-        <div className={`wrapper "" ${checked ? "dark" : "light"}`}>
-          <h2 className="header-text">WELCOME</h2>
-          <Form />
-          <FormButtons />
-        </div>
-        <DarkModeToggler SwitchHandler={SwitchHandler} />
+        <FormWrapper/>
+        <DarkModeToggler />
       </div>
-    </ThemeContext.Provider>
+    </ThemeProvider>
   );
+}function FormWrapper(){
+  const {checked} = useTheme()
+  return(
+    <div className={`wrapper "" ${checked ? "dark" : "light"}`}>
+    <h2 className="header-text">WELCOME</h2>
+    <Form />
+    <FormButtons />
+  </div>
+  )
 }
-
 export default App;
