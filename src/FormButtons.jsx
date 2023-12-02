@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Button } from "@mui/material";
-import { ThemeContext } from "./App";
+import { useTheme } from "./context/ThemeContext";
 function FormButtons() {
-  const checked = useContext(ThemeContext);
+  const {checked} = useTheme()
   console.log(checked);
   return (
     <div
