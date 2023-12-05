@@ -1,9 +1,21 @@
 import React, { useContext } from "react";
 import { Button } from "@mui/material";
 import { useTheme } from "./context/ThemeContext";
+import { useUser } from "./context/UserContext";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 function FormButtons() {
-  const {checked} = useTheme()
-  console.log(checked);
+  const { checked } = useTheme();
+  const { user, setUser } = useUser();
+  let theme = checked ? "dark" : "light";
+  const LoginHandler = () => {
+    if (user.email != "" && user.password != "") {
+      toast("Logged In successfully", { theme });
+      setUser({ email: "", password: "" });
+    } else {
+      toast.error("Fill in all fields!", { theme });
+    }
+  };
   return (
     <div
       style={{
@@ -14,6 +26,7 @@ function FormButtons() {
       }}
     >
       <Button
+        onClick={() => LoginHandler()}
         color={checked ? "secondary" : "primary"}
         className="btn"
         variant="contained"
@@ -27,6 +40,7 @@ function FormButtons() {
       >
         sign up
       </Button>
+      <ToastContainer />
     </div>
   );
 }
